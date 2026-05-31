@@ -1,4 +1,4 @@
-from multiprocessing import process
+import os
 from fastapi import FastAPI, HTTPException
 from typing import Optional, List
 from pydantic import BaseModel
@@ -13,7 +13,7 @@ app = FastAPI(
 # CORS middleware to allow from 3000 & vercel app
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", process.env.VERCEL_APP_URL],
+    allow_origins=["http://localhost:3000", os.environ.get("VERCEL_APP_URL")],
     allow_methods=["*"],
     allow_credentials=True,
     allow_headers=["*"],
